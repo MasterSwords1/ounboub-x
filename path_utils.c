@@ -6,7 +6,7 @@
 /*   By: masterswords </var/spool/mail/masters      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 00:16:35 by masterswo         #+#    #+#             */
-/*   Updated: 2024/12/24 03:11:11 by masterswo        ###   ########.fr       */
+/*   Updated: 2024/12/26 22:49:14 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ char	**get_path(char	**envp)
 			break ;
 		i++;
 	}
-	paths = path_split(envp[i] + 5);
+	paths = ft_split(envp[i] + 5, ':');
 	if (!paths)
-		return (perror("Paths error"), free_paths(paths), exit(1), NULL);
+		return (perror("Paths error"), free_table(paths), exit(1), NULL);
 	return (paths);
 }

@@ -6,13 +6,13 @@
 /*   By: masterswords </var/spool/mail/masters      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 00:28:29 by masterswo         #+#    #+#             */
-/*   Updated: 2024/12/24 03:17:26 by masterswo        ###   ########.fr       */
+/*   Updated: 2024/12/26 22:46:54 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static size_t	word_c(const char *s)
+static size_t	word_c(const char *s, char sep)
 {
 	size_t	i;
 	size_t	count;
@@ -21,7 +21,7 @@ static size_t	word_c(const char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == ':' || s[i + 1] == 0)
+		if (s[i] == sep || s[i + 1] == 0)
 			count++;
 		i++;
 	}
@@ -55,17 +55,17 @@ static char	*ft_substr(const char *s, unsigned int start, size_t len)
 	return (sub);
 }
 
-void	free_paths(char **paths)
+void	free_table(char **split)
 {
 	size_t	i;
 
 	i = 0;
-	while (paths[i])
-		free(paths[i++]);
-	free(paths);
+	while (split[i])
+		free(split[i++]);
+	free(split);
 }
 
-static int	set_paths(const char *s, char **paths)
+static int	set_strs(const char *s, char **split, char sep)
 {
 	size_t	pos;
 	size_t	i;
@@ -76,31 +76,31 @@ static int	set_paths(const char *s, char **paths)
 	pos = 0;
 	while (s[i])
 	{
-		if (s[i] != ':')
+		if (s[i] != sep)
 			count++;
-		if (s[i] != ':' && (s[i + 1] == ':' || s[i + 1] == '\0'))
+		if (s[i] != sep && (s[i + 1] == sep || s[i + 1] == '\0'))
 		{
-			paths[pos] = ft_substr(s, i - count + 1, count);
-			if (!paths[pos++])
-				return (free_paths(paths), 0);
+			split[pos] = ft_substr(s, i - count + 1, count);
+			if (!split[pos++])
+				return (free_table(split), 0);
 			count = 0;
 		}
 		i++;
 	}
-	paths[i] = NULL;
+	split[i] = NULL;
 	return (1);
 }
 
-char	**path_split(const char *s)
+char	**ft_split(const char *s, char sep)
 {
-	char	**paths;
+	char	**split;
 
 	if (!s)
 		return (NULL);
-	paths = malloc((word_c(s) + 1) * sizeof(char *));
-	if (!paths)
+	split = malloc((word_c(s, sep) + 1) * sizeof(char *));
+	if (!split)
 		return (NULL);
-	if (set_paths(s, paths) == 0)
+	if (set_strs(s, split, sep) == 0)
 		return (NULL);
-	return (paths);
+	return (split);
 }

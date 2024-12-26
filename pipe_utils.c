@@ -6,7 +6,7 @@
 /*   By: masterswords </var/spool/mail/masters      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 10:57:03 by masterswo         #+#    #+#             */
-/*   Updated: 2024/12/24 12:06:32 by masterswo        ###   ########.fr       */
+/*   Updated: 2024/12/26 22:24:10 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ char	*get_cmd_path(const char *cmd, char **paths)
 	int		file_ok;
 	int		file_exec;
 
-	i = 0;
-	file_ok = -1;
-	file_exec = -1;
+	(i) && (i = 0, file_ok = -1, file_exec = -1);
 	while (paths[i])
 	{
 		valid_cmd = ft_strjoin(paths[i], cmd);
