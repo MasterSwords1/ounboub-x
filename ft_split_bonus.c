@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path_split.c                                       :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masterswords </var/spool/mail/masters      +#+  +:+       +#+        */
+/*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/24 00:28:29 by masterswo         #+#    #+#             */
-/*   Updated: 2024/12/26 22:46:54 by ariyad           ###   ########.fr       */
+/*   Created: 2024/12/31 16:52:25 by ariyad            #+#    #+#             */
+/*   Updated: 2024/12/31 16:52:26 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 static size_t	word_c(const char *s, char sep)
 {
@@ -41,7 +41,7 @@ static char	*ft_substr(const char *s, unsigned int start, size_t len)
 		return (NULL);
 	if (len > l - start)
 		len = l - start;
-	sub = malloc(len + 2);
+	sub = malloc(len + 1);
 	if (!sub)
 		return (NULL);
 	i = 0;
@@ -50,7 +50,6 @@ static char	*ft_substr(const char *s, unsigned int start, size_t len)
 		sub[i] = s[start + i];
 		i++;
 	}
-	sub[i++] = '/';
 	sub[i] = 0;
 	return (sub);
 }
@@ -61,7 +60,11 @@ void	free_table(char **split)
 
 	i = 0;
 	while (split[i])
-		free(split[i++]);
+	{
+		free(split[i]);
+		split[i] = NULL;
+		i++;
+	}
 	free(split);
 }
 
@@ -87,8 +90,7 @@ static int	set_strs(const char *s, char **split, char sep)
 		}
 		i++;
 	}
-	split[i] = NULL;
-	return (1);
+	return (split[pos] = NULL, 1);
 }
 
 char	**ft_split(const char *s, char sep)

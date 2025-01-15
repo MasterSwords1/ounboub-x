@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -20,6 +20,15 @@ size_t	ft_strlen(const char *s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+void	ft_putstr_fd(const char *str, int fd)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		write(fd, &str[i++], 1);
 }
 
 char	*ft_strdup(const char *s)
