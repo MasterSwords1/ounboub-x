@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   paths_utils.c                                      :+:      :+:    :+:   */
+/*   paths_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:01:56 by ariyad            #+#    #+#             */
-/*   Updated: 2024/12/31 17:53:41 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/01/15 18:55:37 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ char	**get_paths(char **envp)
 			break ;
 		i++;
 	}
+	if (!envp[i])
+		return (NULL);
 	paths = ft_split(envp[i] + 5, ':');
 	if (!paths)
-		return (write(2, "Paths error\n", 13), free_table(paths), exit(1), NULL);
+		return (NULL);
 	return (paths);
 }
 

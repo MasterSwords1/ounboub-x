@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:01:56 by ariyad            #+#    #+#             */
-/*   Updated: 2025/01/14 16:06:39 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/01/15 18:54:41 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ char	**get_paths(char **envp)
 			break ;
 		i++;
 	}
+	if (!envp[i])
+		return (NULL);
 	paths = ft_split(envp[i] + 5, ':');
 	if (!paths)
-		return (write(2, "Paths error\n", 13), free_table(paths), exit(1), NULL);
+		return (NULL);
 	return (paths);
 }
 
@@ -52,6 +54,8 @@ char	*get_cmd_path(char **paths, char *cmd)
 	char	*tmp;
 	ssize_t	i;
 
+	if (!paths)
+		return (NULL);
 	i = -1;
 	tmp = ft_strjoin("/", cmd);
 	if (!tmp)

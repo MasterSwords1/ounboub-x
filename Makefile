@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 SRCS = main.c cmd_exec.c fd_utils.c ft_split.c utils.c paths_utils.c
 BSRCS = main_bonus.c cmd_exec_bonus.c fd_utils_bonus.c ft_split_bonus.c \
 		utils_bonus.c paths_utils_bonus.c gnl_bonus.c
