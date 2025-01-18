@@ -6,13 +6,13 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:01:56 by ariyad            #+#    #+#             */
-/*   Updated: 2025/01/15 18:54:41 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/01/18 12:18:03 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static int	ft_strncmp(const char *s1, const char *s2, size_t len)
+int	ft_strncmp(const char *s1, const char *s2, size_t len)
 {
 	size_t	i;
 

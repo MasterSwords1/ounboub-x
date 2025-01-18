@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:58:47 by ariyad            #+#    #+#             */
-/*   Updated: 2025/01/15 17:37:37 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/01/17 18:01:26 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	set_io(char **av, int ac, int *infile, int *outfile)
 {
 	*infile = open(av[1], O_RDONLY);
-	*outfile = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0777);
+	*outfile = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (*infile < 0)
 		return (perror("input file error"), 0);
 	if (*outfile < 0)

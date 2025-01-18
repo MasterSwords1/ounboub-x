@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:35:33 by ariyad            #+#    #+#             */
-/*   Updated: 2025/01/15 15:51:10 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/01/18 11:59:36 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h>
 
 size_t	ft_strlen(const char *s);
+int		ft_strncmp(const char *s1, const char *s2, size_t len);
 char	*ft_strdup(const char *s);
 char	*ft_strjoin_plus(char *s1, char *s2);
 char	*ft_strjoin(const char *s1, const char *s2);
@@ -31,6 +32,6 @@ void	free_table(char **split);
 char	**ft_split(const char *s, char sep);
 char	**get_paths(char	**envp);
 char	*get_cmd_path(char **paths, char *cmd);
-int		exec(char *av, char **envp, int out, int infile);
+int		exec(char *av, char **envp, int *pipe, int infile);
 
 #endif

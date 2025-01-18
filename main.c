@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:44:27 by ariyad            #+#    #+#             */
-/*   Updated: 2025/01/15 17:42:29 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/01/18 12:20:55 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,14 @@ int	main(int ac, char **av, char **envp)
 	while (i < ac - 2)
 	{
 		set_pipe(p);
-		exec(av[i], envp, p[1], infile);
+		exec(av[i], envp, p, infile);
 		close_fds(infile, p[1], -1, -1);
 		infile = p[0];
 		i++;
 	}
-	set_pipe(p);
-	dup2(outfile, 1);
-	exec(av[i], envp, outfile, infile);
+	p[1] = outfile;
+	exec(av[i], envp, p, infile);
+	close_fds(outfile, infile, -1, -1);
 	while (wait(NULL) >= 0)
 		;
-	close_fds(p[0], p[1], infile, outfile);
 }

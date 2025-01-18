@@ -11,7 +11,7 @@ all: $(NAME)
 
 bonus: $(NAME_BONUS)
 
-$(NAME_BONUS): $(BOBJS) pipex_bonus.h
+$(NAME_BONUS): $(BOBJS)
 	$(CC) $(CFLAGS) $(BOBJS) -o $(NAME_BONUS)
 
 $(NAME): $(OBJS)
