@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:04:32 by ariyad            #+#    #+#             */
-/*   Updated: 2025/01/18 17:07:46 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/01/18 17:16:33 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	heredoc(char *limiter)
 	write(1, "heredoc> ", 10);
 	input = get_next_line(0);
 	if (!input)
-		return (hd_tmp);
+		return (write(1, "\nheredoc delimited by EOF\n", 27), hd_tmp);
 	while (ft_strncmp(limiter, input, ft_strlen(input) - 1) != 0
 		|| *input == '\n')
 	{
@@ -37,7 +37,10 @@ static int	heredoc(char *limiter)
 		write(1, "heredoc> ", 10);
 		input = get_next_line(0);
 		if (!input)
+		{
+			write(1, "\nheredoc delimited by EOF\n", 27);
 			break ;
+		}
 	}
 	close(hd_tmp);
 	hd_tmp = create_hd_tmp();
