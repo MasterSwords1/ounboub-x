@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:04:32 by ariyad            #+#    #+#             */
-/*   Updated: 2025/01/18 11:59:05 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/01/18 17:11:57 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@ int	exec(char *av, char **envp, int *pipe, int infile)
 		close(pipe[0]);
 		paths = get_paths(envp);
 		args = ft_split(av, ' ');
+		if (!paths || !args)
+			exit(1);
 		if (ft_strncmp(args[0], "./", 2) == 0 || *args[0] == '/'
 			|| !access(args[0], X_OK))
 			cmd = av;
 		else
 			cmd = get_cmd_path(paths, args[0]);
 		return (execve(cmd, args, envp), free_table(paths), free_table(args),
-			write(2, "Command invalid\n", 17), exit(0), 1);
+			write(2, "Command invalid\n", 17), exit(1), 1);
 	}
 	return (0);
 }

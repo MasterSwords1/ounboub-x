@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:58:47 by ariyad            #+#    #+#             */
-/*   Updated: 2025/01/18 12:17:14 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/01/18 16:24:40 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ int	create_hd_tmp(void)
 
 	hd_tmp = open("/tmp/hd_tmp", O_CREAT | O_RDWR, 0644);
 	if (hd_tmp < 0)
-		return (perror("tmp file error"), exit(0), -1);
+		return (perror("tmp file error"), exit(1), -1);
 	return (hd_tmp);
 }
