@@ -6,7 +6,7 @@
 /*   By: ariyad <ariyad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:04:32 by ariyad            #+#    #+#             */
-/*   Updated: 2025/01/18 17:16:33 by ariyad           ###   ########.fr       */
+/*   Updated: 2025/01/27 16:26:58 by ariyad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	hd_check(char *str)
 static int	heredoc(char *limiter)
 {
 	char	*input;
+	char	*new_lim;
 	int		hd_tmp;
 
 	hd_tmp = create_hd_tmp();
@@ -29,7 +30,8 @@ static int	heredoc(char *limiter)
 	input = get_next_line(0);
 	if (!input)
 		return (write(1, "\nheredoc delimited by EOF\n", 27), hd_tmp);
-	while (ft_strncmp(limiter, input, ft_strlen(input) - 1) != 0
+	new_lim = ft_strjoin(limiter, "\n");
+	while (ft_strncmp(new_lim, input, ft_strlen(new_lim)) != 0
 		|| *input == '\n')
 	{
 		ft_putstr_fd(input, hd_tmp);
@@ -44,7 +46,7 @@ static int	heredoc(char *limiter)
 	}
 	close(hd_tmp);
 	hd_tmp = create_hd_tmp();
-	return (free(input), hd_tmp);
+	return (free(input), free(new_lim), hd_tmp);
 }
 
 static int	exec(char *av, char **envp, int *pipe, int infile)
@@ -66,7 +68,7 @@ static int	exec(char *av, char **envp, int *pipe, int infile)
 			exit(1);
 		if (ft_strncmp(args[0], "./", 2) == 0 || *args[0] == '/'
 			|| !access(args[0], X_OK))
-			cmd = av;
+			cmd = args[0];
 		else
 			cmd = get_cmd_path(paths, args[0]);
 		return (execve(cmd, args, envp), free_table(paths), free_table(args),
